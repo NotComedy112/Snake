@@ -22,7 +22,7 @@ def pick_snake_spawn():
 #snake config
 snake_sprite = pygame.rect.Rect(((0, 0),(snake_sprite_wh,snake_sprite_wh)))
 snake_sprite.center = pick_snake_spawn()
-snake_final = [snake_sprite.copy()]
+# snake_final = [snake_sprite.copy()]
 
 while running:
     # poll for events
@@ -40,10 +40,21 @@ while running:
     # pygame.draw.square(screen, "yellow", player_pos1, 40)
     pygame.draw.rect(screen, "yellow", snake_sprite)
 
+    
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_w]:
+        snake_sprite.y -= 300 * dt
+    if keys[pygame.K_s]:
+        snake_sprite.y += 300 * dt
+    if keys[pygame.K_a]:
+        snake_sprite.x -= 300 * dt
+    if keys[pygame.K_d]:
+        snake_sprite.x += 300 * dt
+
 
     # flip() the display to put your work on screen
     pygame.display.flip()
 
-    clock.tick(60)  # limits FPS to 60
+    dt = clock.tick(60) / 1000  # limits FPS to 60
 
 pygame.quit()
